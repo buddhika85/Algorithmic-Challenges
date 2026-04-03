@@ -1,1 +1,13 @@
-{}
+{
+  "csharp-dev-tools.roslyn.projectOrSolutionFiles": [
+    "c:\\BUDDHIKA\\Development\\Git\\AlgorithmsPractice\\AlgorithmsPractice.sln"
+  ],
+
+  // --- C# Formatting Fix ---
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    "editor.formatOnSave": true
+  },
+
+  "editor.formatOnSave": true
+}

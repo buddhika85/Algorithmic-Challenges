@@ -1,11 +1,13 @@
 ﻿
+using AlgorithmsPractice.HashMap;
 using AlgorithmsPractice.SlidingWindow;
 using AlgorithmsPractice.TwoPointers;
 
 Console.WriteLine("Hello, Algorithms!\n");
 
 //new ReverseString();
-new LongestSubstring();
+//new LongestSubstring();
+new FirstUniqueCharacter();
 
 
 
@@ -14,7 +16,7 @@ new LongestSubstring();
 
 can you pls give me class stub for this expected time to solve it
 
-the problem description block (like ReverseString)
+the problem description block (like LongestSubstring)
 
 a mini test harness for this one with in constructor with expected output
  like
