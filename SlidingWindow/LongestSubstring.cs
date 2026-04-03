@@ -16,7 +16,7 @@ public class LongestSubstring
 
         foreach (var item in testData)
         {
-            Console.WriteLine($"{item} => {Solve(item)}");
+            Console.WriteLine($"{item} => {Solve2(item)}");
         }
     }
 
@@ -66,6 +66,32 @@ public class LongestSubstring
         }
 
         return maxLength;
+    }
+
+    public int Solve2(string? s)
+    {
+        if (string.IsNullOrEmpty(s))
+            return 0;
+
+        var window = new HashSet<char>();
+        var left = 0;
+        var right = 0;
+        var maximumLength = 0;
+
+        for (; right < s.Length; right++)
+        {
+            var current = s[right];
+            while (window.Contains(current))
+            {            
+                window.Remove(s[left++]);
+            }
+
+            window.Add(current);           
+            var windowSize = right - left + 1;
+            maximumLength = Math.Max(windowSize, maximumLength);
+        }
+
+        return maximumLength;
     }
 }
 
