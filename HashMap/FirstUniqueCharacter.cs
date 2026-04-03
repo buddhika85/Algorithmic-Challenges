@@ -44,8 +44,29 @@ namespace AlgorithmsPractice.HashMap
                 - Time: O(n)
                 - Space: O(1) because alphabet is fixed (26 lowercase letters)
         */
-
         public int Solve(string? s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+                return -1;
+
+            var charCounts = new Dictionary<char, int>();
+            foreach (var item in s)
+            {
+                charCounts[item] = charCounts.GetValueOrDefault(item) + 1;
+            }
+
+            for (var i = 0; i < s.Length; i++)
+            {
+                if (charCounts[s[i]] == 1)
+                    return i;
+            }
+
+            return -1;
+        }
+
+
+
+        public int Solve2(string? s)
         {
             if (string.IsNullOrWhiteSpace(s))
                 return -1;
