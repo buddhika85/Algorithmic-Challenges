@@ -16,7 +16,7 @@ namespace AlgorithmsPractice.HashMap
 
             foreach (var (input, expected) in testData)
             {
-                Console.WriteLine($"{input} => {Solve(input)} (expected: {expected})");
+                Console.WriteLine($"{input} => {SolveLinq(input)} (expected: {expected})");
             }
         }
 
@@ -65,6 +65,21 @@ namespace AlgorithmsPractice.HashMap
         }
 
 
+        public int SolveLinq(string? s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+                return -1;
+
+            var charCounts = (from item in s
+                              group item by item into charGroup
+                              select new
+                              {
+                                  Key = charGroup.Key,
+                                  Count = charGroup.Count()
+                              }).ToDictionary(x => x.Key, x => x.Count);
+
+            return s.Select((item, i) => new { item, i }).FirstOrDefault(x => charCounts[x.item] == 1)?.i ?? -1;
+        }
 
         public int Solve2(string? s)
         {
