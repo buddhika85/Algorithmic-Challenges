@@ -3,6 +3,7 @@ using AlgorithmsPractice.BinarySearch;
 using AlgorithmsPractice.HashMap;
 using AlgorithmsPractice.SlidingWindow;
 using AlgorithmsPractice.SortingGreedy;
+using AlgorithmsPractice.StackProblems;
 using AlgorithmsPractice.TwoPointers;
 
 Console.WriteLine("Hello, Algorithms!\n");
@@ -11,8 +12,8 @@ Console.WriteLine("Hello, Algorithms!\n");
 //new LongestSubstring();
 //new FirstUniqueCharacter();
 //new MinimumMeetingRooms();
-new BinarySearchBasic();
-
+//new BinarySearchBasic();
+new ValidParentheses();
 
 
 
