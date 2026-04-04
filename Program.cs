@@ -1,4 +1,5 @@
 ﻿
+using AlgorithmsPractice.BinarySearch;
 using AlgorithmsPractice.HashMap;
 using AlgorithmsPractice.SlidingWindow;
 using AlgorithmsPractice.SortingGreedy;
@@ -9,7 +10,8 @@ Console.WriteLine("Hello, Algorithms!\n");
 //new ReverseString();
 //new LongestSubstring();
 //new FirstUniqueCharacter();
-new MinimumMeetingRooms();
+//new MinimumMeetingRooms();
+new BinarySearchBasic();
 
 
 
