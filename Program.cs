@@ -1,13 +1,15 @@
 ﻿
 using AlgorithmsPractice.HashMap;
 using AlgorithmsPractice.SlidingWindow;
+using AlgorithmsPractice.SortingGreedy;
 using AlgorithmsPractice.TwoPointers;
 
 Console.WriteLine("Hello, Algorithms!\n");
 
 //new ReverseString();
 //new LongestSubstring();
-new FirstUniqueCharacter();
+//new FirstUniqueCharacter();
+new MinimumMeetingRooms();
 
 
 
