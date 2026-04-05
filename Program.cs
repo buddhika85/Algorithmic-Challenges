@@ -15,8 +15,9 @@ Console.WriteLine("Hello, Algorithms!\n");
 //new MinimumMeetingRooms();
 //new BinarySearchBasic();
 //new ValidParentheses();
-new KthLargestElement();
-
+//new KthLargestElement();
+//new LastStoneWeight();
+new TwoSum();
 
 /* AI Prompt -
 
