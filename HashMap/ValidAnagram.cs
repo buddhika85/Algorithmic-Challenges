@@ -38,10 +38,44 @@ public class ValidAnagram
 
         Time Complexity:
             O(n) — single pass through both strings.
+            Building frequency map → O(n)
+
+            Subtracting counts → O(n)
+
+            Dictionary ops → O(1) average
+
+            Total: O(n)  
+            Space: O(1) if alphabet is fixed (ASCII), otherwise O(n).
+
+        All letters match in count and frequency, just in a different order.
     */
 
     public bool Solve(string s, string t)
     {
-        return false;
+        if (s.Length != t.Length)
+            return false;
+
+        var frequencyDict = new Dictionary<char, int>();
+
+        // build frequencyDict
+        foreach (var item in s)
+        {
+            frequencyDict[item] = frequencyDict.GetValueOrDefault(item, 0) + 1;
+        }
+
+        //removing from frequencyDict
+        foreach (var item in t)
+        {
+            if (!frequencyDict.TryGetValue(item, out int count))
+                return false;           // not found
+
+            // if found then reduce count by 1 or remove if new count is 0
+            if (--count == 0)
+                frequencyDict.Remove(item);
+            else
+                frequencyDict[item] = count;
+        }
+
+        return frequencyDict.Count == 0;
     }
 }

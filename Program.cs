@@ -1,6 +1,7 @@
 ﻿
 using AlgorithmsPractice.BinarySearch;
 using AlgorithmsPractice.HashMap;
+using AlgorithmsPractice.HashMapCounting;
 using AlgorithmsPractice.HeapProblems;
 using AlgorithmsPractice.SlidingWindow;
 using AlgorithmsPractice.SortingGreedy;
@@ -17,7 +18,8 @@ Console.WriteLine("Hello, Algorithms!\n");
 //new ValidParentheses();
 //new KthLargestElement();
 //new LastStoneWeight();
-new TwoSum();
+//new TwoSum();
+new ValidAnagram();
 
 /* AI Prompt -
 
