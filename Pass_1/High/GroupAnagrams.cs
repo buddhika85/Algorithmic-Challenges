@@ -4,7 +4,7 @@ namespace AlgorithmsPractice.Pass_1.High;
 
 public class GroupAnagrams
 {
-    private readonly bool _debug = false; // Set to true to print internal states
+    //private readonly bool _debug = false; // Set to true to print internal states
 
     public GroupAnagrams()
     {
@@ -88,7 +88,7 @@ public class GroupAnagrams
     private void Test(int num, string desc, string[] input, List<List<string>> expected)
     {
         var sw = Stopwatch.StartNew();
-        var actual = Solve(input);
+        var actual = Solve2(input);
         sw.Stop();
 
         bool pass = Compare(actual, expected);
@@ -168,9 +168,48 @@ public class GroupAnagrams
     }
 
     // Optional alternative approach (sorting-based key)
-    private List<List<string>> Solve2(string[] strs)
+    private List<List<string>> Solve2(string[] words)
     {
-        // TODO: implement alternative solution
-        return new List<List<string>>();
+        if (words.Length == 0)
+            return [];
+
+        var signatures = new Dictionary<string, List<string>>();        // singature --> list of words
+
+        for (int i = 0; i < words.Length; i++)
+        {
+            var word = words[i];
+            var freqs = new Dictionary<char, int>();
+            /*
+                [
+                    'a': 1, 'b': 2
+                ]
+            */
+            foreach (var c in word)
+            {
+                if (freqs.TryGetValue(c, out var count))
+                    freqs[c] = ++count;
+                else
+                    freqs[c] = 1;
+            }
+
+            /*
+                abb => a:1#b:2
+            */
+            var signature = string.Join('#', freqs.OrderBy(x => x.Key).Select(x => $"{x.Key}:{x.Value}"));
+
+            /*
+                [
+                    a1#b2 => { abb, bba },
+                    a1#b1 => { ab, ba }
+                ]
+            */
+            if (signatures.TryGetValue(signature, out var wordsWithSameSig))
+                wordsWithSameSig.Add(word);
+            else
+                signatures[signature] = [word];
+        }
+
+
+        return signatures.Values.ToList();
     }
 }
