@@ -4,7 +4,7 @@ namespace AlgorithmsPractice.Pass_1.High;
 
 public class LongestSubstringWithoutRepeatingCharacters
 {
-    private readonly bool _debug = false; // Set to true to print internal states
+    //private readonly bool _debug = false; // Set to true to print internal states
 
     public LongestSubstringWithoutRepeatingCharacters()
     {
@@ -15,14 +15,14 @@ public class LongestSubstringWithoutRepeatingCharacters
     {
         var testHarness = new (int num, string desc, string input, int expected)[]
         {
-        //     (1, "Empty string", "", 0),
-        //     (2, "Single character", "a", 1),
-        //     (3, "All same characters", "aa", 1),
-        //     (4, "Two distinct characters", "ab", 2),
-        //     (5, "Example 1", "abcabcbb", 3),
-        //     (6, "Example 2", "bbbbb", 1),
-        //     (7, "Example 3", "pwwkew", 3),
-        //     (8, "Overlapping window", "dvdf", 3),
+            (1, "Empty string", "", 0),
+            (2, "Single character", "a", 1),
+            (3, "All same characters", "aa", 1),
+            (4, "Two distinct characters", "ab", 2),
+            (5, "Example 1", "abcabcbb", 3),
+            (6, "Example 2", "bbbbb", 1),
+            (7, "Example 3", "pwwkew", 3),
+            (8, "Overlapping window", "dvdf", 3),
             (9, "Repeating with reset", "abba", 2)
         };
 
@@ -35,7 +35,7 @@ public class LongestSubstringWithoutRepeatingCharacters
     private void Test(int num, string desc, string input, int expected)
     {
         var sw = Stopwatch.StartNew();
-        int actual = Solve(input);
+        int actual = Solve2(input);
         sw.Stop();
 
         if (actual == expected)
@@ -99,7 +99,24 @@ public class LongestSubstringWithoutRepeatingCharacters
     */
     private int Solve2(string s)
     {
-        // TODO: implement alternative solution
-        return 0;
+        var lastSeen = new Dictionary<char, int>();
+        int left = 0;
+        int longest = 0;
+
+        for (int right = 0; right < s.Length; right++)
+        {
+            char c = s[right];
+
+            if (lastSeen.TryGetValue(c, out int lastSeenIndex))
+            {
+                left = Math.Max(left, lastSeenIndex + 1);
+            }
+
+            lastSeen[c] = right;
+
+            longest = Math.Max(longest, right - left + 1);
+        }
+
+        return longest;
     }
 }

@@ -26,7 +26,8 @@ Console.WriteLine("Hello, Algorithms!\n");
 
 // pass 1
 //new MeetingRooms();
-new LongestSubstringWithoutRepeatingCharacters();
+//new LongestSubstringWithoutRepeatingCharacters();
+new AlgorithmsPractice.Pass_1.High.ValidAnagram();
 
 /* AI Prompt -
 

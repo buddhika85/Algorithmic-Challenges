@@ -78,18 +78,30 @@ public class TwoSum
     // ------------------------------------------------------------
     // Solve method: implement logic here
     //
-    // Best case Time Complexity:
-    // Average case Time Complexity:
-    // Worst case Time Complexity:
-    // Space Complexity:
+    // Best Case Time Complexity:    O(1)  --> The amount of work does NOT grow with n. its always 2 iterations.
+    //   - We find the answer immediately (e.g., nums[0] + nums[1] = target)
+    //
+    // Average Case Time Complexity: O(n)
+    //   - We scan through part of the array before finding the complement
+    //
+    // Worst Case Time Complexity:   O(n)
+    //   - We scan the entire array before finding the complement
+    //   - Dictionary lookups are O(1) on average
+    //
+    // Space Complexity: O(n)
+    //   - Dictionary may store up to n elements in the worst case
     // ------------------------------------------------------------
     private int[] Solve(int[] nums, int target)
     {
-        // TODO: implement
+        var seenDict = new Dictionary<int, int>();          // num, index of that number
 
-        if (_debug)
+        for (var i = 0; i < nums.Length; i++)
         {
-            Console.WriteLine("Debug mode enabled...");
+            var diff = target - nums[i];
+            if (seenDict.TryGetValue(diff, out int index))
+                return [index, i];
+
+            seenDict.Add(nums[i], i);
         }
 
         return Array.Empty<int>();
