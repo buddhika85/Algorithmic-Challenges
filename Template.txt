@@ -1,0 +1,79 @@
+using System.Diagnostics;
+
+namespace AlgorithmsPractice.Pass_1.High;
+
+public class LongestSubstringWithoutRepeatingCharacters
+{
+    private readonly bool _debug = false; // Set to true to print internal states
+
+    public LongestSubstringWithoutRepeatingCharacters()
+    {
+        RunAllTests();
+    }
+
+    private void RunAllTests()
+    {
+        var testHarness = new (int num, string desc, string input, int expected)[]
+        {
+            (1, "Empty string", "", 0),
+            (2, "Single character", "a", 1),
+            (3, "All same characters", "aa", 1),
+            (4, "Two distinct characters", "ab", 2),
+            (5, "Example 1", "abcabcbb", 3),
+            (6, "Example 2", "bbbbb", 1),
+            (7, "Example 3", "pwwkew", 3),
+            (8, "Overlapping window", "dvdf", 3),
+            (9, "Repeating with reset", "abba", 2)
+        };
+
+        foreach (var (num, desc, input, expected) in testHarness)
+        {
+            Test(num, desc, input, expected);
+        }
+    }
+
+    private void Test(int num, string desc, string input, int expected)
+    {
+        var sw = Stopwatch.StartNew();
+        int actual = Solve(input);
+        sw.Stop();
+
+        if (actual == expected)
+        {
+            Console.WriteLine($"[PASS] {num}. {desc} | Input=\"{input}\" | Expected={expected}, Actual={actual} | Time={sw.ElapsedTicks} ticks");
+        }
+        else
+        {
+            Console.WriteLine($"[FAIL] {num}. {desc} | Input=\"{input}\" | Expected={expected}, Actual={actual} | Time={sw.ElapsedTicks} ticks");
+        }
+    }
+
+    // Solve method: implement logic here
+    // TO DO: Explain your approach with a simple test case
+    //
+    //
+    // Best case Time Complexity:
+    // Average case Time Complexity:
+    // Worst case Time Complexity:
+    // Space Complexity:
+    // Total Expected Time: 10–15 minutes
+    private int Solve(string s)
+    {
+        // TODO: implement
+
+        if (_debug)
+        {
+            Console.WriteLine("Debug mode enabled...");
+            // Print internal states here as needed
+        }
+
+        return 0;
+    }
+
+    // Optional alternative approach
+    private int Solve2(string s)
+    {
+        // TODO: implement alternative solution
+        return 0;
+    }
+}

@@ -3,23 +3,30 @@ using AlgorithmsPractice.BinarySearch;
 using AlgorithmsPractice.HashMap;
 using AlgorithmsPractice.HashMapCounting;
 using AlgorithmsPractice.HeapProblems;
+using AlgorithmsPractice.Pass_1.High;
 using AlgorithmsPractice.SlidingWindow;
+using AlgorithmsPractice.SortingAndGreedy;
 using AlgorithmsPractice.SortingGreedy;
 using AlgorithmsPractice.StackProblems;
 using AlgorithmsPractice.TwoPointers;
 
 Console.WriteLine("Hello, Algorithms!\n");
 
-//new ReverseString();
-//new LongestSubstring();
-//new FirstUniqueCharacter();
-//new MinimumMeetingRooms();
-//new BinarySearchBasic();
-//new ValidParentheses();
-//new KthLargestElement();
-//new LastStoneWeight();
-//new TwoSum();
-new ValidAnagram();
+// new ReverseString();
+// new LongestSubstring();
+// new FirstUniqueCharacter();
+// new MinimumMeetingRooms();
+// new BinarySearchBasic();
+// new ValidParentheses();
+// new KthLargestElement();
+// new LastStoneWeight();
+// new TwoSum();
+// new ValidAnagram();
+// new GroupAnagrams();
+
+// pass 1
+//new MeetingRooms();
+new LongestSubstringWithoutRepeatingCharacters();
 
 /* AI Prompt -
 

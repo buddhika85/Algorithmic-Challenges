@@ -56,7 +56,7 @@ public class LongestSubstring
         for (; right < s.Length; right++)
         {
             var current = s[right];
-            while(window.Contains(current))
+            while (window.Contains(current))
             {
                 window.Remove(s[left++]);
             }
@@ -82,11 +82,11 @@ public class LongestSubstring
         {
             var current = s[right];
             while (window.Contains(current))
-            {            
+            {
                 window.Remove(s[left++]);
             }
 
-            window.Add(current);           
+            window.Add(current);
             var windowSize = right - left + 1;
             maximumLength = Math.Max(windowSize, maximumLength);
         }
