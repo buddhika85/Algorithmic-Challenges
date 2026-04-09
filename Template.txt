@@ -77,11 +77,11 @@ public class TwoSum
 
     // ------------------------------------------------------------
     // Solve method: implement logic here
-    //
-    // Best case Time Complexity:
-    // Average case Time Complexity:
-    // Worst case Time Complexity:
-    // Space Complexity:
+    // -- I have to fills this --
+    // Best case Time Complexity: -- I have to fills this --
+    // Average case Time Complexity: -- I have to fills this --
+    // Worst case Time Complexity: -- I have to fills this --
+    // Space Complexity: -- I have to fills this --
     // ------------------------------------------------------------
     private int[] Solve(int[] nums, int target)
     {

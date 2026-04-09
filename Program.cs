@@ -3,6 +3,7 @@ using AlgorithmsPractice.BinarySearch;
 using AlgorithmsPractice.HashMap;
 using AlgorithmsPractice.HashMapCounting;
 using AlgorithmsPractice.HeapProblems;
+using AlgorithmsPractice.Pass_1.Easy;
 using AlgorithmsPractice.Pass_1.High;
 using AlgorithmsPractice.SlidingWindow;
 using AlgorithmsPractice.SortingAndGreedy;
@@ -28,5 +29,5 @@ Console.WriteLine("Hello, Algorithms!\n");
 //new MeetingRooms();
 //new LongestSubstringWithoutRepeatingCharacters();
 //new AlgorithmsPractice.Pass_1.High.ValidAnagram();
-new AlgorithmsPractice.Pass_1.High.GroupAnagrams();
-
+// new AlgorithmsPractice.Pass_1.High.GroupAnagrams();
+new ValidPalindrome();
