@@ -30,4 +30,7 @@ Console.WriteLine("Hello, Algorithms!\n");
 //new LongestSubstringWithoutRepeatingCharacters();
 //new AlgorithmsPractice.Pass_1.High.ValidAnagram();
 // new AlgorithmsPractice.Pass_1.High.GroupAnagrams();
-new ValidPalindrome();
+//new ValidPalindrome();
+
+
+new WordFrequency();
