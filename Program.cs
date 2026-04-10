@@ -1,5 +1,5 @@
 ﻿
-using AlgorithmsPractice.BinarySearch;
+
 using AlgorithmsPractice.HashMap;
 using AlgorithmsPractice.HashMapCounting;
 using AlgorithmsPractice.HeapProblems;
@@ -36,4 +36,5 @@ Console.WriteLine("Hello, Algorithms!\n");
 
 //new MoveElementToEnd();
 //new MergeSortedArray();
-new MergeSortedArray();
+// new MergeSortedArray();
+new BinarySearch();
