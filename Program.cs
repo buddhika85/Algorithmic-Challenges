@@ -6,7 +6,7 @@ using AlgorithmsPractice.HeapProblems;
 using AlgorithmsPractice.Pass_1.Easy;
 using AlgorithmsPractice.Pass_1.High;
 using AlgorithmsPractice.SlidingWindow;
-using AlgorithmsPractice.SortingAndGreedy;
+using AlgorithmsPractice.Pass_1.Medium;
 using AlgorithmsPractice.SortingGreedy;
 using AlgorithmsPractice.StackProblems;
 using AlgorithmsPractice.TwoPointers;
@@ -31,6 +31,7 @@ Console.WriteLine("Hello, Algorithms!\n");
 //new AlgorithmsPractice.Pass_1.High.ValidAnagram();
 // new AlgorithmsPractice.Pass_1.High.GroupAnagrams();
 //new ValidPalindrome();
+// new WordFrequency();
+//new ProductOfArrayExceptSelf();
 
-
-new WordFrequency();
+new MoveElementToEnd();
