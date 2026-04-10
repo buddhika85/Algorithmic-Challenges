@@ -144,11 +144,41 @@ public class MergeSortedArray
     // Worst case Time Complexity:   --
     // Space Complexity:             --
     // ------------------------------------------------------------
+
+    /*
+    
+Start i = m-1 (end of nums1’s real values)
+Start j = n-1 (end of nums2)
+Start k = m+n-1 (end of nums1 buffer)
+While nums2 still has elements:
+    If nums1[i] > nums2[j], place nums1[i] at k
+    Else place nums2[j] at k
+    Move pointers
+    */
     private void Solve(int[] nums1, int m, int[] nums2, int n)
     {
-        var num1Index = m - 1;
-        var num2Index = n - 1;
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
 
+        while (j >= 0)
+        {
+            if (i >= 0 && nums1[i] > nums2[j])
+            {
+                // place nums1[i] at nums1[k]
+                nums1[k] = nums1[i];
+                --i;
+            }
+            else
+            {
+                // place nums2[j] at nums1[k]
+                nums1[k] = nums2[j];
+                --j;
+            }
+
+            // move pointers
+            --k;
+        }
     }
 
     // Optional brute-force approach

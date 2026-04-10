@@ -34,4 +34,6 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new WordFrequency();
 //new ProductOfArrayExceptSelf();
 
-new MoveElementToEnd();
+//new MoveElementToEnd();
+//new MergeSortedArray();
+new MergeSortedArray();
