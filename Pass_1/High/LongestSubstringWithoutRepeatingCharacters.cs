@@ -181,6 +181,8 @@ public class LongestSubstringWithoutRepeatingCharacters
     }
 
 
+
+
     // ------------------------------------------------------------
     // Sliding Window Mastery Checklist (for me to internalize)
     // ------------------------------------------------------------
@@ -203,5 +205,52 @@ public class LongestSubstringWithoutRepeatingCharacters
     // After these 4, sliding window becomes muscle memory.
     // ------------------------------------------------------------
 
+    /*
+- Expand windowEnd normally.
+- When we hit a repeat, jump windowStart to lastSeen[c] + 1.
+- Use Math.Max to avoid moving windowStart backward.
+- Window always contains unique characters.
 
+        0 1 2 3
+        a b b a
+
+        if lastSeen
+            windowStart = max(windowStart, lastSeenIndex + 1)
+
+        windowSize = windowEnd - windowStart + 1
+        longestLength = max(longestLength, windowSize)       
+
+        windowEnd = 0,     windowStart = 0,     windowSize = 1,     lastSeen = [{a: 0}],                longestLength = 1,      longestString = a
+        windowEnd = 1,     windowStart = 0,     windowSize = 2,     lastSeen = [{a: 0}, {b: 1}],        longestLength = 2,      longestString = ab
+        windowEnd = 2,     windowStart = 2,     windowSize = 1,     lastSeen = [{a: 0}, {b: 2}],        longestLength = 2,      longestString = ab
+        windowEnd = 3,     windowStart = 2,     windowSize = 1,     lastSeen = [{a: 3}, {b: 2}],        longestLength = 2,      longestString = ab
+    */
+
+
+    /*
+
+    Current Window always contains set of unique characters.
+    We try expanding Current Windows - Window End pointer.
+    When we see a character that we have already seen (check using dictionary which stores char and last seen index) we move Window Start to Max of 'last seen index' + 1 OR Window Start 
+        - This is to avoid Window Start going backwards, which may contain repeating characters which we considered before. 
+
+    if character seen before
+        windowStart = max(windowStart, lastSeenIndex + 1)
+    
+    windowSize = windowEnd - windowStart + 1;
+    longest = max(windowSize, longest)
+
+    0 1 2 3 4 5 6 7
+    a b c a b c b b
+
+    windowEnd = 0,      WindowStart = 0,                        windowSize = 1,     lastSeen = [ {a:0} ],                       longest = 1,    longestString = a
+    windowEnd = 1,      WindowStart = 0,                        windowSize = 2,     lastSeen = [ {a:0}, {b:1} ],                longest = 2,    longestString = ab
+    windowEnd = 2,      WindowStart = 0,                        windowSize = 3,     lastSeen = [ {a:0}, {b:1}, {c:2} ],         longest = 3,    longestString = abc
+    windowEnd = 3,      WindowStart = max(0, 0 + 1) = 1,        windowSize = 3,     lastSeen = [ {a:3}, {b:1}, {c:2} ],         longest = 3,    longestString = abc
+    windowEnd = 4,      WindowStart = max(1, 1 + 1) = 2,        windowSize = 3,     lastSeen = [ {a:3}, {b:4}, {c:2} ],         longest = 3,    longestString = abc
+    windowEnd = 5,      WindowStart = max(2, 2 + 1) = 3,        windowSize = 3,     lastSeen = [ {a:3}, {b:4}, {c:5} ],         longest = 3,    longestString = abc
+    windowEnd = 6,      WindowStart = max(3, 4 + 1) = 5,        windowSize = 2,     lastSeen = [ {a:3}, {b:6}, {c:5} ],         longest = 3,    longestString = abc
+    windowEnd = 7,      WindowStart = max(5, 6 + 1) = 7,        windowSize = 1,     lastSeen = [ {a:3}, {b:7}, {c:5} ],         longest = 3,    longestString = abc
+
+    */
 }
