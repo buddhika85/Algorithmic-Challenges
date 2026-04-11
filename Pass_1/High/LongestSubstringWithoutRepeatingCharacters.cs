@@ -35,7 +35,7 @@ public class LongestSubstringWithoutRepeatingCharacters
     private void Test(int num, string desc, string input, int expected)
     {
         var sw = Stopwatch.StartNew();
-        int actual = Solve2(input);
+        int actual = Solve3(input);
         sw.Stop();
 
         if (actual == expected)
@@ -119,4 +119,89 @@ public class LongestSubstringWithoutRepeatingCharacters
 
         return longest;
     }
+
+
+    /*
+                0, 1, 2, 3
+        str =   a, b, b, a
+
+        if (previsly seen)
+            startIdx  = max(lastSeen[str[i]] + 1, startIdx)
+
+        windowSize  = i - startIndex + 1
+        longestLength = max(windowSize, longestLength)
+
+
+        i = 0, startIdx = 0, lastSeen = [ { a: 0 } ], longestSubString = "a", longestLength = 1
+            windowSize  = i - startIndex + 1 = 0 - 0 + 1 = 1
+            longestLength = max(windowSize, longestSubStringLength) = max(1, 0) = 1
+
+
+        i = 1, startIdx = 0, lastSeen = [ { a: 0, b: 1 } ], longestSubString = "ab", longestLength = 2
+            windowSize  = i - startIndex + 1 = 1 - 0 + 1 = 2
+            longestLength = max(windowSize, longestSubStringLength) = max(2, 1) = 2
+
+        i = 2, startIdx = 2, lastSeen = [ { a: 0, b: 1 => 2 } ], longestSubString = "ab", longestLength = 2
+            startIdx  = max(lastSeen[str[i]] + 1, startIdx) = (1 + 1, 2) = 2
+            windowSize  = i - startIndex + 1 = 2 - 2 + 1 = 1
+            longestLength = max(windowSize, longestSubStringLength) = max(1, 2) = 2
+
+        i = 3, startIdx = 2, lastSeen = [ { a: 0 => 3, b: 1 } ], longestSubString = "ab", longestLength = 2
+            startIdx  = max(lastSeen[str[i]] + 1, startIdx) = (0 + 1, 2) = 2
+            windowSize  = i - startIndex + 1 = 3 - 2 + 1 = 2
+            longestLength = max(windowSize, longestSubStringLength) = max(2, 2) = 2
+
+        So, longest sub string length = 2
+        logest unique sub string = "ab"
+    */
+    private int Solve3(string s)
+    {
+        var windowStart = 0;
+        var windowEnd = 0;
+        var longestSubstringLength = 0;
+
+        var lastSeen = new Dictionary<char, int>();
+
+        while (windowEnd < s.Length)
+        {
+            var currentChar = s[windowEnd];
+            if (lastSeen.TryGetValue(currentChar, out var lastSeenIndex))
+            {
+                // we have seen the char before              
+                windowStart = Math.Max(lastSeenIndex + 1, windowStart);
+            }
+
+            lastSeen[currentChar] = windowEnd;
+            var windowSize = windowEnd - windowStart + 1;
+            longestSubstringLength = Math.Max(windowSize, longestSubstringLength);
+
+            ++windowEnd;
+        }
+        return longestSubstringLength;
+    }
+
+
+    // ------------------------------------------------------------
+    // Sliding Window Mastery Checklist (for me to internalize)
+    // ------------------------------------------------------------
+    //
+    // Step 1 — Solve "abba"
+    //      - Don’t trace every step
+    //      - Don’t overthink
+    //      - Just write the code
+    //      - Trust the pattern
+    //
+    // Step 2 — Solve "abcabcbb"
+    //      - Reinforces the “jump left forward” logic
+    //
+    // Step 3 — Solve "pwwkew"
+    //      - Reinforces the “shrink then expand” logic
+    //
+    // Step 4 — Solve "tmmzuxt"
+    //      - The final boss — once I solve this, the pattern is automatic
+    //
+    // After these 4, sliding window becomes muscle memory.
+    // ------------------------------------------------------------
+
+
 }
