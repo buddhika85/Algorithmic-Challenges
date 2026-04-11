@@ -34,17 +34,31 @@ public class LongestSubstringWithoutRepeatingCharacters
 
     private void Test(int num, string desc, string input, int expected)
     {
+        // var sw = Stopwatch.StartNew();
+        // int actual = Solve4(input);
+        // sw.Stop();
+
+        // if (actual == expected)
+        // {
+        //     Console.WriteLine($"[PASS] {num}. {desc} | Input=\"{input}\" | Expected={expected}, Actual={actual} | Time={sw.ElapsedTicks} ticks");
+        // }
+        // else
+        // {
+        //     Console.WriteLine($"[FAIL] {num}. {desc} | Input=\"{input}\" | Expected={expected}, Actual={actual} | Time={sw.ElapsedTicks} ticks");
+        // }
+
+
         var sw = Stopwatch.StartNew();
-        int actual = Solve3(input);
+        (int Length, string UniqueStr) = Solve5(input);
         sw.Stop();
 
-        if (actual == expected)
+        if (Length == expected)
         {
-            Console.WriteLine($"[PASS] {num}. {desc} | Input=\"{input}\" | Expected={expected}, Actual={actual} | Time={sw.ElapsedTicks} ticks");
+            Console.WriteLine($"[PASS] {num}. {desc} | Input=\"{input}\" | Expected Length={expected}, Actual Length={Length}, Actual Unique String={UniqueStr} | Time={sw.ElapsedTicks} ticks");
         }
         else
         {
-            Console.WriteLine($"[FAIL] {num}. {desc} | Input=\"{input}\" | Expected={expected}, Actual={actual} | Time={sw.ElapsedTicks} ticks");
+            Console.WriteLine($"[FAIL] {num}. {desc} | Input=\"{input}\" | Expected Length={expected}, Actual Length={Length}, Actual Unique String={UniqueStr} | Time={sw.ElapsedTicks} ticks");
         }
     }
 
@@ -253,4 +267,119 @@ public class LongestSubstringWithoutRepeatingCharacters
     windowEnd = 7,      WindowStart = max(5, 6 + 1) = 7,        windowSize = 1,     lastSeen = [ {a:3}, {b:7}, {c:5} ],         longest = 3,    longestString = abc
 
     */
+
+
+    /*
+    --Explain logic in 2-4 setences.
+    Sliding window maintains a window which always contains unique characters.
+    We keep the track of longest unique character window found.
+    We iterate through each character of the string and,
+    We store each character and its last seen index in a dictionary.
+
+    --Write if blocks and formulas.
+    if we have already seen the character:
+        windowStart = max(windowStart, last seen index + 1)     --> max used to avoid windowStart going backwards, which may cause us to consider duplicates that we have already seen.
+    
+    windowLength = (windowEnd - windowStart) +  1
+    longest = max(longest, windowLength)
+   
+    Write tracing block. Line per each iteration.
+
+    0 1 2 3 4 5
+    p w w k e w
+
+    windowEnd = 0,     windowStart = 0,                    windowLength = 1,      lastSeen = [ {p: 0} ],                            longest = 1,     longestStr = "p"
+    windowEnd = 1,     windowStart = 0,                    windowLength = 2,      lastSeen = [ {p: 0}, {w: 1} ],                    longest = 2,     longestStr = "pw"
+    windowEnd = 2,     windowStart = max(0, 1+1) = 2,      windowLength = 1,      lastSeen = [ {p: 0}, {w: 2} ],                    longest = 2,     longestStr = "pw"
+    windowEnd = 3,     windowStart = 2,                    windowLength = 2,      lastSeen = [ {p: 0}, {w: 2}, {k:3} ],             longest = 2,     longestStr = "pw"
+    windowEnd = 4,     windowStart = 2,                    windowLength = 3,      lastSeen = [ {p: 0}, {w: 2}, {k:3}, {e:4} ],      longest = 3,     longestStr = "wke"
+    windowEnd = 5,     windowStart = max(2, 2+1) = 3,      windowLength = 3,      lastSeen = [ {p: 0}, {w: 2}, {k:3}, {e:4} ],      longest = 3,     longestStr = "wke"
+    */
+
+
+    /*
+--Explain logic in 2-4 setences.
+Aim is to maintain a window of characters which are always unique.
+And aims to count or maintain the longest window of unique characters that we have seen so far.
+We maintain last seen index for each character in a dictionary.
+
+
+--Write if blocks and formulas.
+if character already seen:
+   windowStart = max(windowStart, last seen index + 1)   --> max is used to avoid making the window start pointer backwards. To avoid already processed chacreters and duplicates.
+
+window length = window end - window start + 1
+longest = max(window length, longest)
+
+--Write tracing block. Line per each iteration.
+0 1 2 3 4 5 6 
+t m m z u x t
+
+windowEnd = 0       windowStart = 0                     windowLength = 1,       seen = [ {t:0} ],                            longest = 1,     longestStr = "t"
+windowEnd = 1       windowStart = 0                     windowLength = 2,       seen = [ {t:0, m:1} ],                       longest = 2,     longestStr = "tm"
+windowEnd = 2       windowStart = max(0, 1+1) = 2       windowLength = 1,       seen = [ {t:0, m:2} ],                       longest = 2,     longestStr = "tm"
+windowEnd = 3       windowStart = 2                     windowLength = 2,       seen = [ {t:0, m:2, z:3} ],                  longest = 2,     longestStr = "tm"
+windowEnd = 4       windowStart = 2                     windowLength = 3,       seen = [ {t:0, m:2, z:3, u:4} ],             longest = 3,     longestStr = "mzu"
+windowEnd = 5       windowStart = 2                     windowLength = 4,       seen = [ {t:0, m:2, z:3, u:4, x:5} ],        longest = 4,     longestStr = "mzux"
+windowEnd = 6       windowStart = max(2, 0+1) = 2       windowLength = 5,       seen = [ {t:6, m:2, z:3, u:4, x:5} ],        longest = 5,     longestStr = "mzuxt"
+*/
+
+
+    public int Solve4(string s)
+    {
+        var windowStart = 0;
+        var windowEnd = 0;
+        var seen = new Dictionary<char, int>();
+        var longest = 0;
+
+
+        while (windowEnd < s.Length)
+        {
+            var current = s[windowEnd];
+            if (seen.TryGetValue(current, out var lastSeenIndex))
+            {
+                windowStart = Math.Max(windowStart, lastSeenIndex + 1);
+            }
+
+            seen[current] = windowEnd;
+            var windowSize = windowEnd - windowStart + 1;
+            longest = Math.Max(longest, windowSize);
+
+            ++windowEnd;
+        }
+
+        return longest;
+    }
+
+
+    public (int Length, string UniqueStr) Solve5(string s)
+    {
+        var windowStart = 0;
+        var windowEnd = 0;
+        var seen = new Dictionary<char, int>();
+        var longest = 0;
+        var longestStr = "";
+
+
+        while (windowEnd < s.Length)
+        {
+            var current = s[windowEnd];
+            if (seen.TryGetValue(current, out var lastSeenIndex))
+            {
+                windowStart = Math.Max(windowStart, lastSeenIndex + 1);
+            }
+
+            seen[current] = windowEnd;
+            var windowSize = windowEnd - windowStart + 1;
+
+            if (windowSize > longest)
+            {
+                longest = windowSize;
+                longestStr = s.Substring(windowStart, windowSize);
+            }
+            ++windowEnd;
+        }
+
+        return (longest, longestStr);
+    }
 }
