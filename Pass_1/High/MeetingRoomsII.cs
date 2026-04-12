@@ -57,7 +57,7 @@ public class MeetingRoomsII
     private void Test(int num, string desc, int[][] intervals, int expected)
     {
         var sw = Stopwatch.StartNew();
-        int actual = Solve(intervals);
+        int actual = Solve2(intervals);
         sw.Stop();
 
         bool pass = actual == expected;
@@ -176,10 +176,105 @@ We track the maximum number of rooms in use at any time.
         return maximumRoomCount;
     }
 
-    // Optional brute-force approach
+
+
+
+
+
+    /*  Example:
+    *      Input:
+    *          intervals = [[0, 30], [5, 10], [15, 20]]
+    *
+    *      Output:
+    *          2
+    *
+    *      Explanation:
+    *          - Meeting [0,30] overlaps with [5,10]
+    *          - Meeting [0,30] overlaps with [15,20]
+    *          → Need 2 rooms
+    */
+    /*
+    I separate all the start times and end times into two arrays and sort them.
+    Then I walk through both arrays with two pointers.
+    Every time a meeting starts before the earliest ending meeting finishes, I need a new room.
+    If a meeting ends first, I free a room by moving the end pointer.
+    While doing this, I track the maximum number of rooms in use at any moment
+    */
+    // meetingCount = intervals.Length
+    // Extract start times and sort -> [ 0,  5, 15]
+    // Extract end times and sort   -> [10, 20, 30]
+    // iStart = 0
+    // iEnd = 0     --> indexes to iterate start & end times
+    // roomsInUse = 0
+    // maxRoomsInUse = 0
+    // while iStart < meetingCount
+    //      if startTimes[iStart] < endTimes[iEnd]          --> a meeting has started in the start and end time
+    //          roomsInUse++
+    //          iStart++
+    //          maxRoomsInUse = max(maxRoomsInUse, roomsInUse)
+    //      else                                            --> a meeting has ended in the start and end time
+    //         roomsInUse--
+    //         iEnd++ 
+
+    // tracing
+    // starts = [ 0,  5, 15]                ends = [10, 20, 30]
+    //
+    // iStart = 0++             iEnd = 0            0 < 10 => true          roomsInUse = 1          maxRoomsInUse = 1               
+    // iStart = 1++             iEnd = 0            5 < 10 => true          roomsInUse = 2          maxRoomsInUse = 2
+    // iStart = 2               iEnd = 0++          15 < 10 => false        roomsInUse = 1          maxRoomsInUse = 2
+    // iStart = 2++             iEnd = 1            15 < 20 => true         roomsInUse = 2          maxRoomsInUse = 2
+    // iStart is 3 now and loops terminates.
+    // so maxRoomsInUse was 2
+    // Time complexity - O(n log n)        --> computations increases propotionaly with meeting count, but sorting dominates because O(n log n) > O(n)
+    // Space complexity - O(n)      --> we used 2 additonal arrays with n size (n = meeting count)
     private int Solve2(int[][] intervals)
     {
-        // TODO: implement alternative solution
-        return 0;
+        var meetingCount = intervals.Length;
+        var startTimes = new int[meetingCount];
+        var endTimes = new int[meetingCount];
+
+        // extract start and end times - O(n)
+        for (var i = 0; i < intervals.Length; i++)
+        {
+            var meeting = intervals[i];
+            startTimes[i] = meeting[0];
+            endTimes[i] = meeting[1];
+        }
+
+        // sorting - quick sort - O(n log n)
+        Array.Sort(startTimes);
+        Array.Sort(endTimes);
+
+        // check time periods - O(n)
+        var iStart = 0;
+        var iEnd = 0;
+        var roomsInUse = 0;
+        var maxRoomsUsed = 0;
+        while (iStart < meetingCount)
+        {
+            if (startTimes[iStart] < endTimes[iEnd])
+            {
+                // a meeting has started in this period
+                ++roomsInUse;
+                maxRoomsUsed = Math.Max(maxRoomsUsed, roomsInUse);
+                ++iStart;
+            }
+            else
+            {
+                // a meeting has ended
+                --roomsInUse;
+                ++iEnd;
+            }
+        }
+
+        return maxRoomsUsed;
     }
+
+    /*
+    -- Explain meeting rooms in 4 sentences
+
+    -- if blocks & formulas
+
+    -- tracing
+    */
 }
