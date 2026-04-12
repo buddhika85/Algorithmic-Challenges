@@ -49,7 +49,7 @@ public class LongestSubstringWithoutRepeatingCharacters
 
 
         var sw = Stopwatch.StartNew();
-        (int Length, string UniqueStr) = Solve5(input);
+        (int Length, string UniqueStr) = Solve6(input);
         sw.Stop();
 
         if (Length == expected)
@@ -382,4 +382,67 @@ windowEnd = 6       windowStart = max(2, 0+1) = 2       windowLength = 5,       
 
         return (longest, longestStr);
     }
+
+
+
+    /*
+--Explain logic in 2-4 setences.
+Sliding window is about maitaining a window which always contains unique characters.
+We always try to expand that window by adding more characters to the right side of the window.
+If we meet a new character where the window already contains, we shrink the sliding window from left until we remove that character from the left.
+We maintain a dictionary which contains character keys and last seen index of that character as value.
+While we iterate to from left to right we keep track of longest unique string/its length.
+
+--Write if blocks and formulas.
+if character previously seen:
+    windowStart = max(windowStart, last seen index + 1)     --> here max used to avoid moving windowStart pointer back, as back may contain already seen repeats, and this will make window non-unique.
+windowLength = windowEnd - windowStart + 1;
+longest = max(longest, windowLength)
+
+--Write tracing block. Line per each iteration.
+0 1 2 3 4 5 6 
+t m m z u x t
+
+loop variable is - windowEnd
+
+windowEnd = 0       windowStart = 0                         seen = [t: 0,                       ]           windowLength = 1        longest = 1           longestStr = t
+windowEnd = 1       windowStart = 0                         seen = [t: 0, m: 1                  ]           windowLength = 2        longest = 2           longestStr = tm
+windowEnd = 2       windowStart = max(0, 1 + 1) = 2         seen = [t: 0, m: 2                  ]           windowLength = 1        longest = 2           longestStr = tm
+windowEnd = 3       windowStart = 2                         seen = [t: 0, m: 2, z:3             ]           windowLength = 2        longest = 2           longestStr = tm
+windowEnd = 4       windowStart = 2                         seen = [t: 0, m: 2, z:3, u:4        ]           windowLength = 3        longest = 3           longestStr = mzu
+windowEnd = 5       windowStart = 2                         seen = [t: 0, m: 2, z:3, u:4, x:5   ]           windowLength = 4        longest = 4           longestStr = mzux
+windowEnd = 6       windowStart = max(2, 0 + 1) = 2         seen = [t: 6, m: 2, z:3, u:4, x:5   ]           windowLength = 5        longest = 5           longestStr = mzuxt
+*/
+    public (int Length, string LogestStr) Solve6(string s)
+    {
+        var windowStart = 0;
+        var windowEnd = 0;
+        var longest = 0;
+        var longestStr = "";
+        var seen = new Dictionary<char, int>();
+
+        while (windowEnd < s.Length)
+        {
+            var curr = s[windowEnd];
+            if (seen.TryGetValue(curr, out var lastSeenIndex))
+            {
+                windowStart = Math.Max(windowStart, lastSeenIndex + 1);
+            }
+
+            seen[curr] = windowEnd;
+            var windowLength = windowEnd - windowStart + 1;
+            //longest = Math.Max(longest, windowLength);
+
+            if (windowLength > longest)
+            {
+                longest = windowLength;
+                longestStr = s.Substring(windowStart, windowLength);
+            }
+
+            ++windowEnd;
+        }
+        return (longest, longestStr);
+    }
+
+
 }
