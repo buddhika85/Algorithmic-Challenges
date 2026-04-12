@@ -61,12 +61,15 @@ public class MeetingRooms
         s = 0
         e = 0
 
-        0 < 10 --> s = 1, e = 0, roomsInUse = 1, maxRooms = 1
-        5 < 10 --> s = 2, e = 0, roomsInUse = 2, maxRooms = 2
+        while start Index value < starts.Length
+
+        0 < 10  --> T --> s = 1, e = 0, roomsInUse = 1, maxRooms = 1
+        5 < 10  --> T --> s = 2, e = 0, roomsInUse = 2, maxRooms = 2
         15 < 10 --> F --> s = 2, e = 1, roomsInUse = 1, maxRooms = 2
-        15 < 20 --> s = 3, e = 1, roomsInUse = 2, maxRooms = 2
-        15 < 10 --> F --> s = 3, e = 2, roomsInUse = 1, maxRooms = 2
-        15 < 30 --> s = 3, e = 3, roomsInUse = 2, maxRooms = 2
+        15 < 20 --> T --> s = 3, e = 2, roomsInUse = 2, maxRooms = 2
+
+        exit loop because start index = 3 < starts.length
+
     11:35 - 11:53
     */
 
