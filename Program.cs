@@ -44,4 +44,7 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new TwoSumII();
 // new ValidAnagramII();
 // new GroupAnagramsII();
-new FirstUniqueCharacterII();
+// new FirstUniqueCharacterII();
+// new AlgorithmsPractice.Pass_1.High.WordFrequency();
+
+new LongestSubstringWithoutRepeatingCharacters();
