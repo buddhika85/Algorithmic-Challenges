@@ -57,7 +57,7 @@ public class MeetingRoomsII
     private void Test(int num, string desc, int[][] intervals, int expected)
     {
         var sw = Stopwatch.StartNew();
-        int actual = Solve2(intervals);
+        int actual = Solve3(intervals);
         sw.Stop();
 
         bool pass = actual == expected;
@@ -270,11 +270,118 @@ We track the maximum number of rooms in use at any time.
         return maxRoomsUsed;
     }
 
-    /*
-    -- Explain meeting rooms in 4 sentences
-
-    -- if blocks & formulas
-
-    -- tracing
+    /*  Example:
+    *      Input:
+    *          intervals = [[0, 30], [5, 10], [15, 20]]
+    *
+    *      Output:
+    *          2
+    *
+    *      Explanation:
+    *          - Meeting [0,30] overlaps with [5,10]
+    *          - Meeting [0,30] overlaps with [15,20]
+    *          → Need 2 rooms
     */
+    /*
+-- Explain meeting rooms in 4 sentences
+extract start times and end times to separate arrays, and then sort them - [0, 5, 15]   [10,20,30]
+To start meetings we need to consider all start times and allocate rooms for them. so if a room is free we reuse it, else we use a new room.
+
+-- if blocks & formulas
+so we use a while loop and go through all start times. and we track startIndex and endIndex.
+and we maintain maxRoomsInUse used and currentRoomsInUse also.
+while startIndex < meeting count
+    if curr start time < curr end time
+        this means we need a new room, so --> ++currentRoomsInUse
+        maxRoomsInUse = max(maxRoomsInUse, currentRoomsInUse)
+        ++startIndex
+    else
+        this means a meeting has ended right now. so --> --currentRoomsInUse
+        ++endIndex
+return maxRoomsInUse
+
+-- tracing
+[[0, 30], [5, 10], [15, 20]]
+starts = [0, 5, 15]   
+ends = [10,20,30]
+
+startIndex = 0++          endIndex = 0            startTime = 0       endTime = 10        start < end = true      currentRoomsInUse = ++0 = 1         maxRoomsInUse = max(0,1)   = 1
+startIndex = 1++          endIndex = 0            startTime = 5       endTime = 10        start < end = true      currentRoomsInUse = ++1 = 2         maxRoomsInUse = max(1,2)   = 2
+startIndex = 2            endIndex = 0++          startTime = 15      endTime = 10        start < end = false     currentRoomsInUse = --2 = 1         maxRoomsInUse = max(2,1)   = 2
+startIndex = 2++          endIndex = 1            startTime = 15      endTime = 20        start < end = true      currentRoomsInUse = ++1 = 2         maxRoomsInUse = max(2,2)   = 2
+startIndex = 2++ = 3 and loop terminates. retyurn 2.
+
+3:44 PM - 3:59 PM
+    */
+    // 4:03 PM - 4:14 PM
+    // Time complexity best case : O(1) --> 1 room needed
+    // Time complexity avg or worst case : O(n log n) --> sorting dominates
+    // space complexi : O(n) --> we need 2 additonal arrays
+    private int Solve3(int[][] intervals)
+    {
+        var meetingCount = intervals.Length;
+
+        // best case
+        if (meetingCount == 1)
+            return 1;       // only need 1 room
+
+        var startTimes = new int[intervals.Length];
+        var endTimes = new int[intervals.Length];
+
+        // populate start & end times - O(n)
+        for (var i = 0; i < meetingCount; i++)
+        {
+            startTimes[i] = intervals[i][0];
+            endTimes[i] = intervals[i][1];
+        }
+
+        // sort
+        Array.Sort(startTimes);     // O (n log n)
+        Array.Sort(endTimes);       // O (n log n)
+
+        // find max meeting rooms needed
+        var roomsInUse = 0;
+        var maxRoomsUsed = 0;
+        var startTimesIndex = 0;
+        var endTimesIndex = 0;
+
+        while (startTimesIndex < meetingCount)
+        {
+            if (startTimes[startTimesIndex] < endTimes[endTimesIndex])
+            {
+                // we have started a new meeting, and all rooms are in use, we need a new room.
+                ++roomsInUse;
+                maxRoomsUsed = Math.Max(maxRoomsUsed, roomsInUse);
+                ++startTimesIndex;
+            }
+            else
+            {
+                // we have finished a meeting, and 1 room is not vacant at this time, we can re use it.
+                --roomsInUse;
+                ++endTimesIndex;
+            }
+        }
+
+        return maxRoomsUsed;
+    }
+
+    /*  Example:
+    *      Input:
+    *          intervals = [[0, 30], [5, 10], [15, 20]]
+    *
+    *      Output:
+    *          2
+    *
+    *      Explanation:
+    *          - Meeting [0,30] overlaps with [5,10]
+    *          - Meeting [0,30] overlaps with [15,20]
+    *          → Need 2 rooms
+    */
+    /*
+-- Explain meeting rooms in 4 sentences
+
+-- if blocks & formulas
+
+-- tracing
+*/
 }
