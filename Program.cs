@@ -50,4 +50,6 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new LongestSubstringWithoutRepeatingCharacters();
 // new MeetingRoomsII();
 //new LongestRepeatingCharacterReplacement();             // To Do
-new AlgorithmsPractice.Pass_1.High.ValidParentheses();
+// new AlgorithmsPractice.Pass_1.High.ValidParentheses();
+
+new AlgorithmsPractice.Pass_1.Medium.ReverseString();
