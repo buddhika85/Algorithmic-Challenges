@@ -55,4 +55,6 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new AlgorithmsPractice.Pass_1.Medium.ReverseString();
 //new ValidPalindromeII();
 
-new MergeSortedArrayII();
+// new MergeSortedArrayII();
+// new AlgorithmsPractice.Pass_1.High.KthLargestElement();
+new AlgorithmsPractice.Pass_1.High.LastStoneWeight();

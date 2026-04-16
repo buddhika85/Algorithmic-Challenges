@@ -122,9 +122,9 @@ public class MergeSortedArrayII
     We never overwrite nums1’s valid region.
     We only write to nums1[k].
     */
-    // Best case Time Complexity: O(n)      
-    // Average case Time Complexity: O(n) 
-    // Worst case Time Complexity: O(n) 
+    // Best case Time Complexity: O(m + n)      
+    // Average case Time Complexity: O(m + n) 
+    // Worst case Time Complexity: O(m + n) 
     // Space Complexity: O(1)       
     // 3:51
     // ------------------------------------------------------------
