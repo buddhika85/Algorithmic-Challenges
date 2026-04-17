@@ -47,9 +47,9 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new FirstUniqueCharacterII();
 // new AlgorithmsPractice.Pass_1.High.WordFrequency();
 
-new LongestSubstringWithoutRepeatingCharacters();
+// new LongestSubstringWithoutRepeatingCharacters();
 // new MeetingRoomsII();
-//new LongestRepeatingCharacterReplacement();             // To Do
+new LongestRepeatingCharacterReplacement();
 // new AlgorithmsPractice.Pass_1.High.ValidParentheses();
 
 // new AlgorithmsPractice.Pass_1.Medium.ReverseString();
