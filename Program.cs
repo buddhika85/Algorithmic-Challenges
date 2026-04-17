@@ -47,7 +47,7 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new FirstUniqueCharacterII();
 // new AlgorithmsPractice.Pass_1.High.WordFrequency();
 
-// new LongestSubstringWithoutRepeatingCharacters();
+new LongestSubstringWithoutRepeatingCharacters();
 // new MeetingRoomsII();
 //new LongestRepeatingCharacterReplacement();             // To Do
 // new AlgorithmsPractice.Pass_1.High.ValidParentheses();
@@ -57,4 +57,4 @@ Console.WriteLine("Hello, Algorithms!\n");
 
 // new MergeSortedArrayII();
 // new AlgorithmsPractice.Pass_1.High.KthLargestElement();
-new AlgorithmsPractice.Pass_1.High.LastStoneWeight();
+// new AlgorithmsPractice.Pass_1.High.LastStoneWeight();

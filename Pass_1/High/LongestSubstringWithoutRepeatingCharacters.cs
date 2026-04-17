@@ -49,7 +49,7 @@ public class LongestSubstringWithoutRepeatingCharacters
 
 
         var sw = Stopwatch.StartNew();
-        (int Length, string UniqueStr) = Solve7(input);
+        (int Length, string UniqueStr) = Solve8(input);
         sw.Stop();
 
         if (Length == expected)
@@ -509,4 +509,80 @@ windowEnd = 6       windowStart = max(2,0+1) = 2        seen = [ t:6, m:2, z:3, 
 
     }
 
+
+    /*
+--Explain logic in 2-4 setences.
+We use a sliding window, which is dnoted by window start and window end pointers. This sliding window always always contains non-repeating unique chars.
+We loop from left to right using window end variable.
+We keep a track of all chars we have seen with their last seen index in a Dictionary.
+When we see a new char we check, have we already seen it? if not,
+    we add that char to sliding window and expand it to right.
+    else we shrink sliding window from left.
+we keep the longest sliding window and its length so that we can return it.
+
+--Write if blocks and formulas.
+if char is seen before:
+    windowStart = max(windowStart, last seen index + 1)         --> we use max here to make sure that window start pointer never goes back, which results in re porocessing already seen duplicates
+
+windowLength = windowEnd - windowStart  + 1;
+longest = max(longest, windowLength)
+
+
+--Write tracing block. Line per each iteration.
+0 1 2 3 4 5 6 
+t m m z u x t
+
+windowEnd       windowStart                             windowLength             seen                                        longest             longestStr
+0++             0                                       0 - 0 + 1 = 1            [t:0                                ]       max(0, 1) = 1       t
+1++             0                                       1 - 0 + 1 = 2            [t:0, m:1                           ]       max(1, 2) = 2       tm
+2++             max(0, 1 + 1) = 2                       2 - 2 + 1 = 1            [t:0, m:2                           ]       max(2, 1) = 2       tm
+3++             2                                       3 - 2 + 1 = 2            [t:0, m:2, z:3                      ]       max(2, 2) = 2       tm
+4++             2                                       4 - 2 + 1 = 3            [t:0, m:2, z:3, u:4                 ]       max(2, 3) = 3       mzu
+5++             2                                       5 - 2 + 1 = 4            [t:0, m:2, z:3, u:4, x:5            ]       max(3, 4) = 4       mzux
+6++             max(2, 0 + 1) = 2                       6 - 2 + 1 = 5            [t:0, m:2, z:3, u:4, x:5            ]       max(4, 5) = 5       mzuxt
+
+
+3:27 PM - 3:43 PM
+*/
+    // code start - 3:46 PM - 3:59 PM
+    // Best case Time Complexity: O(1) --> just 1 char string
+    // Average case Time Complexity: O(n)       --> number of computations increase propotionaly with input strings number of characters
+    // Worst case Time Complexity: O(n)  
+    // Space Complexity: O(n)       --> we need addtional dictionary possibly max of n size
+    public (int Length, string LogestStr) Solve8(string s)
+    {
+        if (string.IsNullOrWhiteSpace(s))
+            return (0, string.Empty);
+
+        // best case
+        if (s.Length == 1)
+            return (1, s);
+
+        var windowStart = 0;
+        var windowEnd = 0;
+        var longestLength = 0;
+        var longest = "";
+        var seen = new Dictionary<char, int>();     // char --> last seen index
+
+        while (windowEnd < s.Length)
+        {
+            var currChar = s[windowEnd];
+            if (seen.TryGetValue(currChar, out int lastSeenIndex))
+            {
+                windowStart = Math.Max(windowStart, lastSeenIndex + 1);
+            }
+
+            seen[currChar] = windowEnd;
+            var windowSize = windowEnd - windowStart + 1;
+            if (windowSize > longestLength)
+            {
+                longestLength = windowSize;
+                longest = s.Substring(windowStart, windowSize);
+            }
+
+            ++windowEnd;
+        }
+
+        return (longestLength, longest);
+    }
 }
