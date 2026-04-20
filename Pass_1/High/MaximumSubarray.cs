@@ -154,10 +154,72 @@ element             currMax                             MaxSoFar
         return maxSoFar;
     }
 
-    // Optional brute-force approach
+    // Trying sliding window
+    /*
+     windowEnd       windowStart         currentTotal            maxTotal
+    0               0                   -2                      -2          --> expand
+    1               0                   -2+1 = -1               -1          --> expand
+    2               0                   -1+-3 = -4              -1          --> shrink
+    2               1                   -4+2 = -2               -1          --> shrink
+    2               2                   -2-1 = -3               -1          --> expand --> because we cannot shrink any more to a valid window, as window start will pass window end if so
+    3               2                   -3-4 = +1               +1          --> expand
+    4               2                   +1-1 = 0                +1          --> shrink
+    4               3                   0+3 = +3                +3          --> expand
+    5               3                   +3+2 = +5               +5          --> expand
+    6               3                   +5+1 = +6               +6          --> expand
+    7               3                   +6-5 = +5               +6          --> shrink
+    7               4                   +1-4 = -3               +6          --> shrink
+    7               5                   -3+1 = -2               +6          --> shrink
+    7               6                   -2-2 = -4               +6          --> shrink
+    7               7                   -4-1 = -5               +6          --> expand --> because we cannot shrink any more to a valid window, as window start will pass window end if so
+    8               7                   -5+4 = -1               +6          --> shrink
+    8               8                   -1+5 = +4               +6          --> expand --> because we cannot shrink any more to a valid window, as window start will pass window end if so
+    9--> terminate
+    */
     private int Solve2(int[] nums)
     {
-        // TODO: implement alternative O(n^2) solution
-        return 0;
+
+
+        var windowStart = 0;
+        var windowEnd = 0;
+        var currentWindowTotal = nums[0];
+        var maxSeen = currentWindowTotal;
+        var isExpand = true;
+
+        while (windowStart < nums.Length - 1)
+        {
+            if (isExpand && windowEnd < nums.Length - 1)
+            {
+                ++windowEnd;
+                currentWindowTotal += nums[windowEnd];
+                if (currentWindowTotal >= maxSeen)
+                {
+                    maxSeen = currentWindowTotal;
+                }
+                else
+                {
+                    // lets try shrinking next time
+                    isExpand = false;
+                }
+            }
+            else
+            {
+                var toRemove = nums[windowStart];
+                ++windowStart;
+                currentWindowTotal -= toRemove;
+
+                if (currentWindowTotal >= maxSeen)
+                {
+                    maxSeen = currentWindowTotal;
+                }
+                // did we hit shrinking limit ? then expand next time
+                if (windowStart == windowEnd && windowEnd < nums.Length - 1)
+                    isExpand = true;
+            }
+
+
+        }
+
+        return maxSeen;
     }
 }
