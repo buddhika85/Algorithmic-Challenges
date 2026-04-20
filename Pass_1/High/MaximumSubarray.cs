@@ -56,7 +56,7 @@ public class MaximumSubarray
     private void Test(int num, string desc, int[] nums, int expected)
     {
         var sw = Stopwatch.StartNew();
-        int actual = Solve(nums);
+        int actual = Solve3(nums);
         sw.Stop();
 
         bool pass = actual == expected;
@@ -221,5 +221,49 @@ element             currMax                             MaxSoFar
         }
 
         return maxSeen;
+    }
+
+
+    /*
+    * ------------------------------------------------------------
+    *  Problem: Maximum Subarray (Kadane's Algorithm)
+    * ------------------------------------------------------------
+    *  Given an integer array nums, find the contiguous subarray
+    *  (containing at least one number) which has the largest sum
+    *  and return its sum.
+    *
+    *  Example:
+    *      Input:
+    *          nums = [-2,1,-3,4,-1,2,1,-5,4]
+    *
+    *      Output:
+    *          6
+    *
+    *      Explanation:
+    *          The subarray [4,-1,2,1] has the largest sum = 6.
+    *
+    * ------------------------------------------------------------
+    *  Expected Time: 5–10 minutes
+    * ------------------------------------------------------------
+    */
+    /*
+        -2, 1, -3, 4, -1, 2, 1, -5, 4
+        -2, 1, -2, 4,  3, 5, 6,  1, 5
+    */
+    // Time complexity - O(n)  --> with array size time complexity increases propotionaly
+    // space complexity - O(1) --> no additional DS needed
+    public int Solve3(int[] nums)
+    {
+        var currMax = nums[0];
+        var maxSoFar = currMax;
+
+        for (int i = 1; i < nums.Length; i++)
+        {
+            var curr = nums[i];
+            currMax = Math.Max(currMax + curr, curr);
+            maxSoFar = Math.Max(maxSoFar, currMax);
+        }
+
+        return maxSoFar;
     }
 }
