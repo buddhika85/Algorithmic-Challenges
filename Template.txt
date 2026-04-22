@@ -1,3 +1,9 @@
+ok, Pair programming Mock interview time.
+
+Lest do [...............................].
+
+Can you pls give me hacker rank like template for [...............................] like ?
+
 using System;
 using System.Diagnostics;
 
@@ -102,3 +108,19 @@ public class TwoSum
         return Array.Empty<int>();
     }
 }
+
+
+
+
+
+its [----- time -----------] now, As the interviewer you need to give me only nuges, hints not full solution, not code snippets or not Pseudo code.
+Maxmimum time should be 1 hour. Buts lets try to finish it early. 
+Keep time for time & space complexity anslysis also. You are in control of the interview. You can jump in say you need to work fast to me. or
+“you need to move faster here”
+“explain your reasoning more clearly”
+“jump to the key insight”
+
+
+If possible, I dont need outputs like - 'now interviewer says, "you can xyz..."' - just say "you can xyz..."
+
+are you ready to be interviewer like that? - dont give me full answer or pseudocode unless I explicitly ask. ok?

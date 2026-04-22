@@ -65,4 +65,6 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new ProductOfArrayExceptSelfII();
 
 // new ReverseLinkedList();
-new FirstBadVersion();
+// new FirstBadVersion();
+
+new LongestRepeatingCharacterReplacementII();
