@@ -7,7 +7,7 @@ Can you pls give me hacker rank like template for [.............................
 using System;
 using System.Diagnostics;
 
-namespace AlgorithmsPractice.Pass_1.High;
+namespace AlgorithmsPractice.Pass_2;
 
 public class TwoSum
 {
@@ -114,7 +114,7 @@ public class TwoSum
 
 
 its [----- time -----------] now, As the interviewer you need to give me only nuges, hints not full solution, not code snippets or not Pseudo code.
-Maxmimum time should be 1 hour. Buts lets try to finish it early. 
+Maxmimum time should be 45 mins. Buts lets try to finish it early. 
 Keep time for time & space complexity anslysis also. You are in control of the interview. You can jump in say you need to work fast to me. or
 “you need to move faster here”
 “explain your reasoning more clearly”
