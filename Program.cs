@@ -71,4 +71,6 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new LongestRepeatingCharacterReplacementII();
 
 // new LongestSubstringWithoutRepeatingCharactersIII();
-new MinStack();
+// new MinStack();
+
+new AlgorithmsPractice.Pass_2.ProductOfArrayExceptSelf();
