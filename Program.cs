@@ -75,4 +75,7 @@ Console.WriteLine("Hello, Algorithms!\n");
 
 // new AlgorithmsPractice.Pass_2.ProductOfArrayExceptSelf();
 // new AlgorithmsPractice.Pass_2.MinimumWindowSubstring();
-new AlgorithmsPractice.Pass_2.MeetingRooms();
+// new AlgorithmsPractice.Pass_2.MeetingRooms();
+
+// new KthLargestQuickselect();
+new KthSmallestQuickSelect();
