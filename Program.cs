@@ -74,4 +74,5 @@ Console.WriteLine("Hello, Algorithms!\n");
 // new MinStack();
 
 // new AlgorithmsPractice.Pass_2.ProductOfArrayExceptSelf();
-new AlgorithmsPractice.Pass_2.MinimumWindowSubstring();
+// new AlgorithmsPractice.Pass_2.MinimumWindowSubstring();
+new AlgorithmsPractice.Pass_2.MeetingRooms();

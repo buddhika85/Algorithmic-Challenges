@@ -124,3 +124,8 @@ Keep time for time & space complexity anslysis also. You are in control of the i
 If possible, I dont need outputs like - 'now interviewer says, "you can xyz..."' - just say "you can xyz..."
 
 are you ready to be interviewer like that? - dont give me full answer or pseudocode unless I explicitly ask. ok?
+
+
+
+
+ok, your verdict, interviwer comments - score out of 100, improvement to do
